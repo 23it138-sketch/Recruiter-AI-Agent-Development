@@ -4,6 +4,7 @@ from utils.helpers import is_valid_resume, extract_email, extract_phone
 from utils.parser import extract_metadata, extract_text_from_pdf
 from database.db_manager import insert_candidate, get_all_candidates, delete_candidate
 from agents.recruiter_agent import analyze_candidate_fit
+from utils.embeddings_matcher import calculate_similarity_scores
 
 def main():
     """
@@ -184,6 +185,58 @@ def main():
         st.write("**Suggested Interview Questions:**")
         for q in ai_result["generated_questions"]:
             st.write(f"- {q}")
+
+    # Displaying the semantic search matching from the Lesson 6 Exercise
+    st.write("---")
+    st.write("### 🔍 Candidate Semantic Search Matching (FAISS):")
+    
+    search_jd = st.text_area(
+        label="Enter Job Requirements for Search",
+        value="Looking for a Python developer who knows SQL, database modeling, and building Streamlit dashboards."
+    )
+    
+    min_threshold = st.slider(
+        label="Minimum Match Threshold (%)",
+        min_value=0.0,
+        max_value=100.0,
+        value=30.0,
+        step=5.0
+    )
+    
+    if st.button("Run Semantic Matcher"):
+        # Fetch candidates from the database
+        db_candidates = get_all_candidates()
+        if db_candidates:
+            # Convert SQLite rows to dictionary list
+            cand_dicts = [dict(row) for row in db_candidates]
+            
+            # Run embedding similarity scoring
+            scores_list = calculate_similarity_scores(
+                job_description=search_jd,
+                candidates=cand_dicts,
+                min_threshold=min_threshold
+            )
+            
+            if scores_list:
+                # Merge candidate names into scores representation
+                name_lookup = {cand["id"]: cand["name"] for cand in cand_dicts}
+                
+                results_table = []
+                for idx, match_item in enumerate(scores_list):
+                    c_id = match_item["candidate_id"]
+                    results_table.append({
+                        "Rank": idx + 1,
+                        "Candidate ID": c_id,
+                        "Candidate Name": name_lookup.get(c_id, "Unknown"),
+                        "Semantic Match Score": f"{match_item['semantic_score']}%"
+                    })
+                
+                st.write("**Matching Candidates Ranked:**")
+                st.table(results_table)
+            else:
+                st.info(f"No candidates matched above the {min_threshold}% threshold.")
+        else:
+            st.info("No candidates registered in database to search against.")
 
 if __name__ == "__main__":
     main()
