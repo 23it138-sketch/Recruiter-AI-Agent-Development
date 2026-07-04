@@ -2,6 +2,7 @@ import streamlit as st
 from utils.helpers import is_valid_resume
 from utils.parser import extract_metadata
 from database.db_manager import insert_candidate, get_all_candidates, delete_candidate
+from agents.recruiter_agent import analyze_candidate_fit
 
 def main():
     """
@@ -92,6 +93,38 @@ def main():
         st.table(table_data)
     else:
         st.info("No candidates registered in database.")
+
+    # Displaying the AI recruiter analysis check from the Lesson 4 Exercise
+    st.write("### 🤖 AI Recruiter Agent Analysis Check:")
+    
+    dummy_jd = (
+        "We are looking for a Senior Python Developer with at least 5 years of experience "
+        "in AI APIs, Streamlit dashboards, SQL databases, and agentic orchestration frameworks."
+    )
+    
+    st.write("**Testing Job Description:**")
+    st.info(dummy_jd)
+    
+    # Run the AI evaluation (will catch if API Key is not set)
+    ai_result = analyze_candidate_fit(
+        resume_text=dummy_resume,
+        job_description=dummy_jd
+    )
+    
+    st.write("**AI Evaluation Results:**")
+    if ai_result["match_score"] == 0.0 and "Error" in ai_result["ai_evaluation"]:
+        st.error(ai_result["ai_evaluation"])
+    else:
+        col_ai1, col_ai2 = st.columns(2)
+        col_ai1.metric(label="Match Score", value=f"{ai_result['match_score']}%")
+        col_ai2.metric(label="Seniority Level", value=ai_result.get("seniority_level", "N/A"))
+        
+        st.write("**Detailed Assessment:**")
+        st.info(ai_result["ai_evaluation"])
+        
+        st.write("**Suggested Interview Questions:**")
+        for q in ai_result["generated_questions"]:
+            st.write(f"- {q}")
 
 if __name__ == "__main__":
     main()
