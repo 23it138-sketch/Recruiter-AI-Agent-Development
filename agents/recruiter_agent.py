@@ -7,7 +7,7 @@ from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
 
 # Load API keys from .env file
-load_dotenv()
+load_dotenv(override=True)
 
 # Define the structure we want the AI to return using Pydantic
 class CandidateEvaluation(BaseModel):
@@ -42,7 +42,7 @@ def analyze_candidate_fit(resume_text: str, job_description: str) -> dict:
         # 2. Initialize the Gemini LLM via LangChain
         # We use gemini-1.5-flash as it is fast, cheap, and excellent for structured extraction
         llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash",
+            model="gemini-2.5-flash",
             google_api_key=api_key,
             temperature=0.2  # Low temperature makes the output more deterministic/factual
         )
