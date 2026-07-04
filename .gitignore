@@ -16,9 +16,11 @@ __pycache__/
 database/*.db
 *.sqlite3
 
-# Uploaded Resumes (Temp files)
-uploads/
-resumes/
+# Uploaded Resumes (Temp files, ignore everything except .gitkeep)
+uploads/*
+!uploads/.gitkeep
+resumes/*
+!resumes/.gitkeep
 
 # Streamlit config (optional / system files)
 .streamlit/config.toml
