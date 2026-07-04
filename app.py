@@ -1,6 +1,7 @@
 import streamlit as st
-from utils.helpers import is_valid_resume
-from utils.parser import extract_metadata
+import os
+from utils.helpers import is_valid_resume, extract_email, extract_phone
+from utils.parser import extract_metadata, extract_text_from_pdf
 from database.db_manager import insert_candidate, get_all_candidates, delete_candidate
 from agents.recruiter_agent import analyze_candidate_fit
 
@@ -25,6 +26,53 @@ def main():
         "This application will help you extract candidate info, compare resumes "
         "with job descriptions, and rank candidates using LangChain and Gemini."
     )
+
+    # Section: Upload Resume
+    st.write("---")
+    st.subheader("📤 Upload Candidate Resume")
+    uploaded_file = st.file_uploader("Choose a PDF resume file...", type=["pdf"])
+    
+    if uploaded_file is not None:
+        file_name = uploaded_file.name
+        temp_path = os.path.join("uploads", file_name)
+        
+        # 1. Save uploaded file to local directory
+        with open(temp_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+            
+        st.info("Extracting resume text...")
+        
+        # 2. Parse text from the uploaded PDF
+        raw_extracted_text = extract_text_from_pdf(temp_path)
+        
+        if raw_extracted_text:
+            # 3. Extract candidate metadata using regex
+            cand_email = extract_email(raw_extracted_text)
+            cand_phone = extract_phone(raw_extracted_text)
+            cand_name = os.path.splitext(file_name)[0].replace("_", " ").replace("-", " ").title()
+            
+            # 4. Save parsed candidate in SQLite database
+            new_id = insert_candidate(
+                name=cand_name,
+                email=cand_email,
+                phone=cand_phone,
+                resume_text=raw_extracted_text,
+                file_path=temp_path
+            )
+            
+            st.success(f"Candidate **{cand_name}** successfully parsed and saved! Database ID: `{new_id}`")
+            
+            # Show preview of extracted info
+            st.write("#### 🔍 Extracted Details Preview:")
+            col_pre1, col_pre2 = st.columns(2)
+            col_pre1.write(f"**Name:** {cand_name}")
+            col_pre1.write(f"**Email:** {cand_email}")
+            col_pre2.write(f"**Phone:** {cand_phone}")
+            
+            with st.expander("Show Extracted Raw Text"):
+                st.text(raw_extracted_text[:1000] + "\n...[truncated]..." if len(raw_extracted_text) > 1000 else raw_extracted_text)
+        else:
+            st.error("Failed to extract any text from this PDF file.")
 
     # Status check
     st.success("Lesson 1: Project environment is successfully running! 🎉")
