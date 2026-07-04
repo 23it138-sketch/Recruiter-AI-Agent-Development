@@ -56,3 +56,40 @@ def extract_phone(text: str) -> str:
     phone_pattern = r'\b(?:\+?\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}\b'
     match = re.search(phone_pattern, text)
     return match.group(0) if match else "N/A"
+
+
+def extract_entities_spacy(text: str) -> dict:
+    """
+    Uses spaCy NLP library to extract named entities (Organizations, Persons, Locations)
+    from candidate resume text.
+    
+    Args:
+        text (str): Resume text.
+        
+    Returns:
+        dict: Lists of extracted entities categorized by label.
+    """
+    import spacy
+    
+    try:
+        # Load the downloaded english language pipeline
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(text)
+        
+        # Pull specific entity labels (limit to top 5 unique names per class to avoid dashboard clutter)
+        orgs = list(set([ent.text for ent in doc.ents if ent.label_ == "ORG"]))[:5]
+        people = list(set([ent.text for ent in doc.ents if ent.label_ == "PERSON"]))[:5]
+        gpe = list(set([ent.text for ent in doc.ents if ent.label_ in ("GPE", "LOC")]))[:5]
+        
+        return {
+            "organizations": orgs,
+            "people": people,
+            "locations": gpe
+        }
+    except Exception as e:
+        print(f"spaCy NLP extraction failed: {e}")
+        return {
+            "organizations": [],
+            "people": [],
+            "locations": []
+        }

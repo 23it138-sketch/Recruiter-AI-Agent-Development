@@ -1,8 +1,8 @@
 import streamlit as st
 import os
 import json
-from utils.helpers import is_valid_resume, extract_email, extract_phone
-from utils.parser import extract_metadata, extract_text_from_pdf
+from utils.helpers import is_valid_resume, extract_email, extract_phone, extract_entities_spacy
+from utils.parser import extract_metadata, extract_text
 from database.db_manager import (
     insert_candidate, 
     get_all_candidates, 
@@ -79,7 +79,7 @@ def main():
         # Sub-panel: Upload resume PDF
         with col_up:
             st.subheader("📤 Upload Candidate Resume")
-            uploaded_file = st.file_uploader("Drop PDF file here...", type=["pdf"])
+            uploaded_file = st.file_uploader("Drop PDF or DOCX file here...", type=["pdf", "docx"])
 
             if uploaded_file is not None:
                 # Rule 1: File Size Check (2MB)
@@ -93,7 +93,7 @@ def main():
                         f.write(uploaded_file.getbuffer())
                     
                     st.info("Reading document structure...")
-                    raw_text = extract_text_from_pdf(temp_path)
+                    raw_text = extract_text(temp_path)
 
                     if raw_text:
                         # Extract metrics
@@ -115,8 +115,14 @@ def main():
                             file_path=temp_path
                         )
                         st.success(f"Profile created for **{name}** (ID: {new_id})!")
+                        
+                        # Local NLP entity parsing check (spaCy)
+                        spacy_entities = extract_entities_spacy(raw_text)
+                        st.write("#### 🏷️ Local NLP Entities Tagged (spaCy):")
+                        st.write(f"🏢 **Organizations:** {', '.join(spacy_entities['organizations']) if spacy_entities['organizations'] else 'None found'}")
+                        st.write(f"📍 **Locations/GPE:** {', '.join(spacy_entities['locations']) if spacy_entities['locations'] else 'None found'}")
                     else:
-                        st.error("Failed to parse resume text. Verify it is a valid text PDF.")
+                        st.error("Failed to parse resume text. Verify it is a valid PDF or DOCX document.")
 
         # Sub-panel: Candidate Database Table
         with col_list:
