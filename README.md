@@ -83,3 +83,9 @@ GEMINI_API_KEY="your_api_key_here"
 ```bash
 streamlit run app.py
 ```
+
+### 6. Run the Test Suite
+To execute the automated unit tests and verify the text processing utilities and regex engines:
+```bash
+python -m unittest discover tests
+```
