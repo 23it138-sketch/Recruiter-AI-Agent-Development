@@ -160,3 +160,119 @@ def delete_candidate(candidate_id: int) -> bool:
         conn.close()
 
     return success
+
+
+def insert_job(title: str, description: str, skills_required: str = None) -> int:
+    """
+    Inserts a new job description profile into the jobs table.
+
+    Args:
+        title (str): Job role title.
+        description (str): Full text of job description.
+        skills_required (str, optional): Key skills requested.
+
+    Returns:
+        int: The ID of the inserted job profile.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO jobs (title, description, skills_required)
+            VALUES (?, ?, ?)
+        """, (title, description, skills_required))
+        conn.commit()
+        return cursor.lastrowid
+    except sqlite3.Error as e:
+        print(f"Database error during job insertion: {e}")
+        return -1
+    finally:
+        conn.close()
+
+
+def insert_match(candidate_id: int, job_id: int, match_score: float, ai_evaluation: str, generated_questions: list) -> int:
+    """
+    Inserts or updates an AI evaluation score and questions matching 
+    a candidate to a specific job description.
+
+    Args:
+        candidate_id (int): Database ID of candidate.
+        job_id (int): Database ID of job description.
+        match_score (float): Computed AI fit percentage.
+        ai_evaluation (str): Text assessment.
+        generated_questions (list): Tailored interview questions.
+
+    Returns:
+        int: The ID of the inserted or updated match record.
+    """
+    import json
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Serialize questions list to JSON string for DB storage
+    questions_json = json.dumps(generated_questions)
+
+    try:
+        # Check if matching record already exists
+        cursor.execute("""
+            SELECT id FROM matches 
+            WHERE candidate_id = ? AND job_id = ?
+        """, (candidate_id, job_id))
+        row = cursor.fetchone()
+
+        if row:
+            match_id = row["id"]
+            cursor.execute("""
+                UPDATE matches
+                SET match_score = ?, ai_evaluation = ?, generated_questions = ?, matched_at = CURRENT_TIMESTAMP
+                WHERE id = ?
+            """, (match_score, ai_evaluation, questions_json, match_id))
+        else:
+            cursor.execute("""
+                INSERT INTO matches (candidate_id, job_id, match_score, ai_evaluation, generated_questions)
+                VALUES (?, ?, ?, ?, ?)
+            """, (candidate_id, job_id, match_score, ai_evaluation, questions_json))
+            match_id = cursor.lastrowid
+
+        conn.commit()
+        return match_id
+
+    except sqlite3.Error as e:
+        print(f"Database error during match insertion: {e}")
+        return -1
+    finally:
+        conn.close()
+
+
+def get_matches_for_job(job_id: int) -> list:
+    """
+    Queries and returns all candidate matching records for a given job.
+    Joins candidate details for UI display, sorting by match score descending.
+
+    Args:
+        job_id (int): Database ID of the target job description.
+
+    Returns:
+        list: SQLite Row list containing candidate profiles and match scores.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT 
+            m.id as match_id,
+            m.match_score,
+            m.ai_evaluation,
+            m.generated_questions,
+            m.matched_at,
+            c.id as candidate_id,
+            c.name as candidate_name,
+            c.email as candidate_email,
+            c.phone as candidate_phone
+        FROM matches m
+        JOIN candidates c ON m.candidate_id = c.id
+        WHERE m.job_id = ?
+        ORDER BY m.match_score DESC
+    """, (job_id,))
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
