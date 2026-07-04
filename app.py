@@ -2,7 +2,15 @@ import streamlit as st
 import os
 from utils.helpers import is_valid_resume, extract_email, extract_phone
 from utils.parser import extract_metadata, extract_text_from_pdf
-from database.db_manager import insert_candidate, get_all_candidates, delete_candidate
+from database.db_manager import (
+    insert_candidate, 
+    get_all_candidates, 
+    delete_candidate,
+    insert_job,
+    get_all_jobs,
+    insert_match,
+    get_matches_for_job
+)
 from agents.recruiter_agent import analyze_candidate_fit
 from utils.embeddings_matcher import calculate_similarity_scores
 
@@ -27,6 +35,43 @@ def main():
         "This application will help you extract candidate info, compare resumes "
         "with job descriptions, and rank candidates using LangChain and Gemini."
     )
+
+    # Section: Job Descriptions Manager
+    st.write("---")
+    st.subheader("💼 Job Description Profiles Manager")
+    
+    with st.expander("➕ Create New Job Description Profile"):
+        with st.form("create_job_form", clear_on_submit=True):
+            job_title_input = st.text_input("Job Title (e.g. Senior Python Developer)")
+            job_desc_input = st.text_area("Job Requirements & Responsibilities")
+            job_skills_input = st.text_input("Key Skills (comma separated, e.g. Python, SQLite, FAISS)")
+            submit_job = st.form_submit_button("Save Job Profile")
+            
+            if submit_job:
+                if job_title_input and job_desc_input:
+                    new_job_id = insert_job(
+                        title=job_title_input,
+                        description=job_desc_input,
+                        skills_required=job_skills_input
+                    )
+                    st.success(f"Successfully saved job profile: **{job_title_input}** (ID: {new_job_id})!")
+                else:
+                    st.error("Job Title and Job Description details are required.")
+
+    # Dropdown selector to choose active job
+    st.write("#### 🎯 Select Active Job Description:")
+    all_jobs = get_all_jobs()
+    
+    selected_job = None
+    if all_jobs:
+        # Create choice strings: "Job Title (ID: X)"
+        job_choices = {f"{job['title']} (ID: {job['id']})": job for job in all_jobs}
+        choice = st.selectbox("Choose a job description to match candidates against:", list(job_choices.keys()))
+        selected_job = job_choices[choice]
+        
+        st.info(f"**Selected Job Requirements:**\n\n{selected_job['description']}")
+    else:
+        st.warning("No job descriptions found in the database. Please create one above first!")
 
     # Section: Upload Resume
     st.write("---")
@@ -157,34 +202,43 @@ def main():
     # Displaying the AI recruiter analysis check from the Lesson 4 Exercise
     st.write("### 🤖 AI Recruiter Agent Analysis Check:")
     
-    dummy_jd = (
-        "We are looking for a Senior Python Developer with at least 5 years of experience "
-        "in AI APIs, Streamlit dashboards, SQL databases, and agentic orchestration frameworks."
-    )
-    
-    st.write("**Testing Job Description:**")
-    st.info(dummy_jd)
-    
-    # Run the AI evaluation (will catch if API Key is not set)
-    ai_result = analyze_candidate_fit(
-        resume_text=dummy_resume,
-        job_description=dummy_jd
-    )
-    
-    st.write("**AI Evaluation Results:**")
-    if ai_result["match_score"] == 0.0 and "Error" in ai_result["ai_evaluation"]:
-        st.error(ai_result["ai_evaluation"])
+    if selected_job:
+        active_jd = selected_job["description"]
+        active_job_id = selected_job["id"]
+        st.write(f"Evaluating test candidate **Jane Smith** against: **{selected_job['title']}**")
+        
+        # Run the AI evaluation (will catch if API Key is not set)
+        ai_result = analyze_candidate_fit(
+            resume_text=dummy_resume,
+            job_description=active_jd
+        )
+        
+        st.write("**AI Evaluation Results:**")
+        if ai_result["match_score"] == 0.0 and "Error" in ai_result["ai_evaluation"]:
+            st.error(ai_result["ai_evaluation"])
+        else:
+            col_ai1, col_ai2 = st.columns(2)
+            col_ai1.metric(label="Match Score", value=f"{ai_result['match_score']}%")
+            col_ai2.metric(label="Seniority Level", value=ai_result.get("seniority_level", "N/A"))
+            
+            st.write("**Detailed Assessment:**")
+            st.info(ai_result["ai_evaluation"])
+            
+            st.write("**Suggested Interview Questions:**")
+            for q in ai_result["generated_questions"]:
+                st.write(f"- {q}")
+            
+            # Save the AI evaluation result to our SQL matches table
+            match_id = insert_match(
+                candidate_id=jane_id,
+                job_id=active_job_id,
+                match_score=ai_result["match_score"],
+                ai_evaluation=ai_result["ai_evaluation"],
+                generated_questions=ai_result["generated_questions"]
+            )
+            st.write(f"Persistent Match logged in SQLite matches table. Match ID: `{match_id}`.")
     else:
-        col_ai1, col_ai2 = st.columns(2)
-        col_ai1.metric(label="Match Score", value=f"{ai_result['match_score']}%")
-        col_ai2.metric(label="Seniority Level", value=ai_result.get("seniority_level", "N/A"))
-        
-        st.write("**Detailed Assessment:**")
-        st.info(ai_result["ai_evaluation"])
-        
-        st.write("**Suggested Interview Questions:**")
-        for q in ai_result["generated_questions"]:
-            st.write(f"- {q}")
+        st.info("Please create and select a job description above to test AI matching.")
 
     # Displaying the semantic search matching from the Lesson 6 Exercise
     st.write("---")
@@ -192,7 +246,7 @@ def main():
     
     search_jd = st.text_area(
         label="Enter Job Requirements for Search",
-        value="Looking for a Python developer who knows SQL, database modeling, and building Streamlit dashboards."
+        value=selected_job["description"] if selected_job else "Looking for a Python developer who knows SQL, database modeling, and building Streamlit dashboards."
     )
     
     min_threshold = st.slider(

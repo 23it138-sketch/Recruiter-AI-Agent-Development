@@ -276,3 +276,18 @@ def get_matches_for_job(job_id: int) -> list:
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+
+def get_all_jobs() -> list:
+    """
+    Queries and returns all job profiles from the jobs table.
+
+    Returns:
+        list: A list of SQLite Row objects representing job descriptions.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM jobs ORDER BY created_at DESC")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
