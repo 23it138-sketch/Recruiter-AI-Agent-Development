@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.helpers import is_valid_resume
+from utils.parser import extract_metadata
 
 def main():
     """
@@ -37,6 +38,27 @@ def main():
     
     st.info(f"File: **{test_file_1}** -> Valid Resume? **{is_valid_1}** (Expected: True)")
     st.warning(f"File: **{test_file_2}** -> Valid Resume? **{is_valid_2}** (Expected: False)")
+
+    # Displaying the parser metadata demonstration from the Lesson 2 Exercise
+    st.write("### 📊 Parser Metadata Extraction Check:")
+    
+    dummy_resume = (
+        "John Doe\n"
+        "Email: john.doe@email.com | Phone: 123-456-7890\n"
+        "SUMMARY\n"
+        "Experienced software developer specializing in Python, AI, and cloud systems. "
+        "Over 5 years of experience designing scalable backend APIs and machine learning models. "
+        "Proficient in LangChain, Streamlit, PostgreSQL, and AWS. "
+        "Looking to contribute to cutting-edge AI recruitment automation tools."
+    )
+    
+    metadata = extract_metadata(dummy_resume)
+    
+    # Render metrics in three side-by-side columns
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Word Count", value=metadata["word_count"])
+    col2.metric(label="Character Count", value=metadata["char_count"])
+    col3.metric(label="Est. Pages", value=metadata["estimated_pages"])
 
 if __name__ == "__main__":
     main()
