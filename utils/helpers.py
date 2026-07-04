@@ -53,7 +53,7 @@ def extract_phone(text: str) -> str:
     """
     import re
     # Matches standard numbers like: +1-123-456-7890, (123) 456-7890, 123-456-7890, etc.
-    phone_pattern = r'\b(?:\+?\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}\b'
+    phone_pattern = r'\+?(?:\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}'
     match = re.search(phone_pattern, text)
     return match.group(0) if match else "N/A"
 
