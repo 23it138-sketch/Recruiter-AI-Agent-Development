@@ -124,18 +124,27 @@ def main():
             candidates = get_all_candidates()
             
             if candidates:
+                # Add Name Filter Search Bar
+                search_query = st.text_input("🔍 Search Candidates by Name:", "")
+                
                 cand_dicts = [dict(cand) for cand in candidates]
                 # Filter out raw text columns to keep the table compact
                 display_table = []
                 for idx, cand in enumerate(cand_dicts):
-                    display_table.append({
-                        "ID": cand["id"],
-                        "Name": cand["name"],
-                        "Email": cand["email"],
-                        "Phone": cand["phone"],
-                        "Uploaded At": cand["created_at"]
-                    })
-                st.table(display_table)
+                    # Filter candidates based on name query (case-insensitive)
+                    if search_query.lower() in cand["name"].lower():
+                        display_table.append({
+                            "ID": cand["id"],
+                            "Name": cand["name"],
+                            "Email": cand["email"],
+                            "Phone": cand["phone"],
+                            "Uploaded At": cand["created_at"]
+                        })
+                
+                if display_table:
+                    st.table(display_table)
+                else:
+                    st.info(f"No candidates found matching: '{search_query}'")
 
                 # Control to delete profiles
                 with st.expander("🗑️ Delete Candidate Profiles"):
