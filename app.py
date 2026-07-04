@@ -1,6 +1,7 @@
 import streamlit as st
 from utils.helpers import is_valid_resume
 from utils.parser import extract_metadata
+from database.db_manager import insert_candidate, get_all_candidates, delete_candidate
 
 def main():
     """
@@ -59,6 +60,38 @@ def main():
     col1.metric(label="Word Count", value=metadata["word_count"])
     col2.metric(label="Character Count", value=metadata["char_count"])
     col3.metric(label="Est. Pages", value=metadata["estimated_pages"])
+
+    # Displaying the database SQLite demonstration from the Lesson 3 Exercise
+    st.write("### 🗄️ Database SQLite Operations Check:")
+    
+    # 1. Insert a candidate (Jane Smith)
+    jane_email = "jane.smith@example.com"
+    jane_id = insert_candidate(
+        name="Jane Smith",
+        email=jane_email,
+        phone="555-0199",
+        resume_text="Jane Smith resume text. Skills: Python, SQL, Streamlit."
+    )
+    
+    st.write(f"Candidate **Jane Smith** is registered in database. ID: `{jane_id}`.")
+    
+    # 2. Add button to delete Jane Smith
+    if st.button("Delete Jane Smith"):
+        deleted = delete_candidate(jane_id)
+        if deleted:
+            st.success("Successfully deleted Jane Smith from the database! Refresh to update.")
+        else:
+            st.error("Failed to delete candidate or candidate already deleted.")
+
+    # 3. Retrieve and list all candidates in the database
+    st.write("#### 📋 Current Registered Candidates Table:")
+    candidates_list = get_all_candidates()
+    if candidates_list:
+        # Convert SQLite row objects into dicts so Streamlit can format it in a clean table
+        table_data = [dict(row) for row in candidates_list]
+        st.table(table_data)
+    else:
+        st.info("No candidates registered in database.")
 
 if __name__ == "__main__":
     main()
