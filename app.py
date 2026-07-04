@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.helpers import is_valid_resume
 
 def main():
     """
@@ -24,6 +25,18 @@ def main():
 
     # Status check
     st.success("Lesson 1: Project environment is successfully running! 🎉")
+
+    # Displaying the helper function demonstration from the Exercise
+    st.write("### 🛠️ File Validation Helper Check:")
+    
+    test_file_1 = "candidate_resume.pdf"
+    test_file_2 = "hacked_document.exe"
+    
+    is_valid_1 = is_valid_resume(test_file_1)
+    is_valid_2 = is_valid_resume(test_file_2)
+    
+    st.info(f"File: **{test_file_1}** -> Valid Resume? **{is_valid_1}** (Expected: True)")
+    st.warning(f"File: **{test_file_2}** -> Valid Resume? **{is_valid_2}** (Expected: False)")
 
 if __name__ == "__main__":
     main()
