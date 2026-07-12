@@ -1,14 +1,1 @@
-streamlit>=1.30.0
-langchain>=0.1.0
-langchain-google-genai>=0.0.6
-google-generativeai>=0.3.2
-python-dotenv>=1.0.0
-pymupdf>=1.23.0
-pdfplumber>=0.10.0
-spacy>=3.7.0
-sentence-transformers>=2.2.0
-faiss-cpu>=1.7.4
-torchvision
-python-docx
-
-
+# Project dependencies will be added here.
