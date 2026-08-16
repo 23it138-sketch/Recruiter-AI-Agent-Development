@@ -1,0 +1,37 @@
+John Doe
+john.doe@example.com | (555) 123-4567 | San Francisco, CA
+LinkedIn: linkedin.com/in/johndoe | GitHub: github.com/johndoe
+
+PROFESSIONAL SUMMARY
+Senior Software Engineer with 6 years of experience designing and developing scalable backend systems. Passionate about writing clean code, mentoring junior developers, and solving complex problems with innovative technical solutions.
+
+TECHNICAL SKILLS
+Languages: Python, Java, SQL, Bash
+Cloud & DevOps: AWS, Docker, CI/CD pipelines, Kubernetes
+Databases: PostgreSQL, MySQL, Redis
+Frameworks: React, Spring Boot, Flask
+Other: REST APIs, Git, Agile Methodologies
+
+PROFESSIONAL EXPERIENCE
+Tech Solutions Inc. | Senior Software Engineer | Jan 2021 - Present
+- Architected and deployed microservices on AWS, reducing system latency by 30%.
+- Led a team of 4 engineers to rebuild the core payment processing module.
+- Implemented CI/CD pipelines using GitHub Actions, cutting deployment times in half.
+- Mentored junior developers through code reviews and pair programming sessions.
+
+Innovate Software LLC | Software Engineer | Jun 2018 - Dec 2020
+- Developed RESTful APIs for a high-traffic e-commerce platform using Python and Flask.
+- Optimized database queries in PostgreSQL, improving data retrieval speeds by 40%.
+- Collaborated with front-end developers to integrate React components with backend services.
+
+EDUCATION
+Bachelor of Science in Computer Science | State University | 2018
+
+CERTIFICATIONS
+AWS Certified Solutions Architect – Associate
+
+PROJECTS
+E-Commerce Analytics Dashboard
+- Built a real-time analytics dashboard using Python, React, and WebSockets to visualize customer behavior.
+Automated Deployment Script
+- Authored open-source bash scripts to automate the provisioning of development environments.

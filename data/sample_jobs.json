@@ -1,0 +1,272 @@
+[
+    {
+        "id": "job_001",
+        "title": "Senior Software Engineer",
+        "company": "TechCorp Industries",
+        "location": "San Francisco, CA (Hybrid)",
+        "type": "Full-time",
+        "experience_required": "5+ years",
+        "education_required": "Bachelor's in Computer Science or related field",
+        "salary_range": "$130,000 - $180,000",
+        "description": "We are looking for a Senior Software Engineer to join our platform team. You will be responsible for architecting and building scalable backend systems. The ideal candidate thrives in a fast-paced environment and enjoys mentoring junior developers. You will work closely with product and design teams to deliver high-quality software.",
+        "requirements": ["python", "java", "aws", "docker", "kubernetes", "rest api", "sql", "git", "agile", "microservices"],
+        "responsibilities": [
+            "Design and implement scalable backend services",
+            "Lead code reviews and mentor junior developers",
+            "Collaborate with cross-functional teams to define product requirements",
+            "Optimize applications for maximum speed and scalability",
+            "Troubleshoot and debug production issues"
+        ],
+        "benefits": [
+            "Competitive salary and equity",
+            "Health, dental, and vision insurance",
+            "Unlimited PTO",
+            "401(k) matching",
+            "Professional development budget"
+        ],
+        "posted_date": "2024-12-01"
+    },
+    {
+        "id": "job_002",
+        "title": "Data Scientist",
+        "company": "DataVerse Analytics",
+        "location": "New York, NY (Remote)",
+        "type": "Full-time",
+        "experience_required": "3+ years",
+        "education_required": "Master's or Ph.D. in Data Science, Statistics, or related field",
+        "salary_range": "$120,000 - $160,000",
+        "description": "DataVerse Analytics is seeking a Data Scientist to uncover actionable insights from large datasets. You will build predictive models and machine learning algorithms to solve complex business problems. Our team values innovation, data-driven decision making, and continuous learning.",
+        "requirements": ["python", "r", "machine learning", "sql", "tensorflow", "pandas", "numpy", "statistics", "data visualization", "tableau"],
+        "responsibilities": [
+            "Develop machine learning models for predictive analytics",
+            "Analyze large, complex datasets to identify trends and patterns",
+            "Design and execute A/B tests to measure feature impact",
+            "Communicate findings clearly to non-technical stakeholders",
+            "Deploy models to production environments"
+        ],
+        "benefits": [
+            "Fully remote work environment",
+            "Comprehensive health coverage",
+            "Annual retreat",
+            "Home office stipend",
+            "Generous parental leave"
+        ],
+        "posted_date": "2024-12-05"
+    },
+    {
+        "id": "job_003",
+        "title": "Product Manager",
+        "company": "InnovateTech Solutions",
+        "location": "Austin, TX (On-site)",
+        "type": "Full-time",
+        "experience_required": "4+ years",
+        "education_required": "Bachelor's degree, MBA preferred",
+        "salary_range": "$110,000 - $150,000",
+        "description": "InnovateTech Solutions is looking for a strategic Product Manager to drive our product vision. You will own the roadmap for our flagship SaaS platform from conception to launch. The successful candidate will have strong leadership skills and a deep understanding of user needs. Join us in shaping the future of enterprise software.",
+        "requirements": ["agile", "scrum", "product strategy", "user research", "jira", "data analysis", "a/b testing", "stakeholder management"],
+        "responsibilities": [
+            "Define and execute the product roadmap and strategy",
+            "Gather and prioritize product and customer requirements",
+            "Work closely with engineering, design, and marketing teams",
+            "Analyze market trends and competitive landscape",
+            "Track and report on product performance metrics"
+        ],
+        "benefits": [
+            "Competitive compensation package",
+            "Health and wellness programs",
+            "Catered lunches and snacks",
+            "Commuter benefits",
+            "Stock options"
+        ],
+        "posted_date": "2024-12-10"
+    },
+    {
+        "id": "job_004",
+        "title": "Frontend Developer",
+        "company": "WebCraft Studios",
+        "location": "Seattle, WA (Hybrid)",
+        "type": "Full-time",
+        "experience_required": "2+ years",
+        "education_required": "Bachelor's in Computer Science or bootcamp equivalent",
+        "salary_range": "$90,000 - $130,000",
+        "description": "WebCraft Studios is hiring a creative Frontend Developer to build engaging user interfaces. You will work with designers and backend engineers to translate wireframes into interactive web applications. We prioritize performance, accessibility, and modern web standards. If you love crafting pixel-perfect designs, we want you on our team.",
+        "requirements": ["javascript", "react", "html", "css", "typescript", "git", "responsive design", "web performance", "accessibility"],
+        "responsibilities": [
+            "Develop new user-facing features using React",
+            "Ensure the technical feasibility of UI/UX designs",
+            "Optimize applications for maximum speed and scalability",
+            "Collaborate with backend developers on API integration",
+            "Write clean, maintainable, and well-tested code"
+        ],
+        "benefits": [
+            "Flexible working hours",
+            "Medical, dental, and vision care",
+            "Gym membership reimbursement",
+            "Paid time off and holidays",
+            "Annual learning stipend"
+        ],
+        "posted_date": "2024-12-12"
+    },
+    {
+        "id": "job_005",
+        "title": "Machine Learning Engineer",
+        "company": "AI Horizons Inc",
+        "location": "Boston, MA (On-site)",
+        "type": "Full-time",
+        "experience_required": "4+ years",
+        "education_required": "Master's or Ph.D. in Computer Science or related field",
+        "salary_range": "$140,000 - $190,000",
+        "description": "AI Horizons Inc is searching for an experienced Machine Learning Engineer to develop cutting-edge AI systems. You will build, train, and deploy deep learning models at scale. Our ideal candidate has a strong background in NLP or computer vision and a passion for pushing the boundaries of AI research.",
+        "requirements": ["python", "pytorch", "tensorflow", "deep learning", "nlp", "computer vision", "cuda", "docker", "gcp", "mlops"],
+        "responsibilities": [
+            "Design and implement robust machine learning pipelines",
+            "Train and fine-tune large-scale neural networks",
+            "Deploy AI models into production environments",
+            "Conduct research to stay abreast of industry advancements",
+            "Optimize model performance for latency and throughput"
+        ],
+        "benefits": [
+            "Top-tier compensation and equity",
+            "Premium health insurance plans",
+            "Relocation assistance",
+            "Free daily meals",
+            "Generous vacation policy"
+        ],
+        "posted_date": "2024-12-15"
+    },
+    {
+        "id": "job_006",
+        "title": "DevOps Engineer",
+        "company": "CloudScale Systems",
+        "location": "Denver, CO (Remote)",
+        "type": "Full-time",
+        "experience_required": "3+ years",
+        "education_required": "Bachelor's in IT, Computer Science, or equivalent experience",
+        "salary_range": "$115,000 - $155,000",
+        "description": "CloudScale Systems is looking for a DevOps Engineer to automate and streamline our infrastructure. You will manage our cloud deployments and ensure system reliability and security. The role involves closely working with developers to create efficient CI/CD pipelines.",
+        "requirements": ["aws", "linux", "docker", "kubernetes", "terraform", "ci/cd", "jenkins", "python", "bash", "monitoring"],
+        "responsibilities": [
+            "Manage and maintain cloud infrastructure on AWS",
+            "Develop and improve CI/CD pipelines",
+            "Implement infrastructure as code using Terraform",
+            "Monitor system performance and troubleshoot issues",
+            "Ensure security best practices across all systems"
+        ],
+        "benefits": [
+            "Remote work flexibility",
+            "Comprehensive benefits package",
+            "Internet and phone stipend",
+            "401(k) with company match",
+            "Flexible PTO"
+        ],
+        "posted_date": "2024-12-18"
+    },
+    {
+        "id": "job_007",
+        "title": "Full Stack Developer",
+        "company": "DigitalPeak Technologies",
+        "location": "Chicago, IL (Hybrid)",
+        "type": "Full-time",
+        "experience_required": "3+ years",
+        "education_required": "Bachelor's in Computer Science or related field",
+        "salary_range": "$100,000 - $140,000",
+        "description": "DigitalPeak Technologies needs a versatile Full Stack Developer to build end-to-end web solutions. You will work on both the front-end user experience and the back-end architecture. We value developers who are product-minded and can take ownership of entire features.",
+        "requirements": ["javascript", "typescript", "react", "node.js", "python", "django", "postgresql", "mongodb", "docker", "graphql"],
+        "responsibilities": [
+            "Develop functional databases, applications, and servers",
+            "Design and develop effective APIs",
+            "Create visually appealing front-end applications",
+            "Test software to ensure responsiveness and efficiency",
+            "Write technical documentation"
+        ],
+        "benefits": [
+            "Competitive base salary",
+            "Health and dental benefits",
+            "Bi-weekly team events",
+            "Continuous learning budget",
+            "Paid sick days"
+        ],
+        "posted_date": "2024-12-20"
+    },
+    {
+        "id": "job_008",
+        "title": "Business Analyst",
+        "company": "StrategyFirst Consulting",
+        "location": "Atlanta, GA (On-site)",
+        "type": "Full-time",
+        "experience_required": "2+ years",
+        "education_required": "Bachelor's in Business, Finance, or related field",
+        "salary_range": "$80,000 - $115,000",
+        "description": "StrategyFirst Consulting is seeking a Business Analyst to bridge the gap between IT and the business. You will analyze business processes and identify areas for improvement. Strong communication and analytical skills are essential for this role.",
+        "requirements": ["sql", "excel", "data analysis", "requirements gathering", "process modeling", "tableau", "communication", "agile"],
+        "responsibilities": [
+            "Evaluate business processes and anticipate requirements",
+            "Uncover areas for improvement and develop optimization strategies",
+            "Perform comprehensive requirements analysis",
+            "Document and communicate the results of your efforts",
+            "Ensure solutions meet business needs and requirements"
+        ],
+        "benefits": [
+            "Competitive salary",
+            "Performance bonuses",
+            "Health insurance",
+            "Retirement plans",
+            "Career growth opportunities"
+        ],
+        "posted_date": "2024-12-22"
+    },
+    {
+        "id": "job_009",
+        "title": "UX/UI Designer",
+        "company": "DesignFlow Creative",
+        "location": "Los Angeles, CA (Hybrid)",
+        "type": "Full-time",
+        "experience_required": "3+ years",
+        "education_required": "Bachelor's in Design, HCI, or related field",
+        "salary_range": "$95,000 - $135,000",
+        "description": "DesignFlow Creative is looking for a talented UX/UI Designer to create intuitive and beautiful digital experiences. You will take complex tasks and transform them into accessible and easy-to-use designs for our users around the world.",
+        "requirements": ["figma", "sketch", "wireframing", "prototyping", "user research", "usability testing", "adobe creative suite", "interaction design"],
+        "responsibilities": [
+            "Conduct user research and evaluate user feedback",
+            "Create wireframes, storyboards, user flows, and site maps",
+            "Design graphic user interface elements, like menus and tabs",
+            "Build page navigation buttons and search fields",
+            "Collaborate with developers to ensure accurate implementation"
+        ],
+        "benefits": [
+            "Excellent compensation package",
+            "Health, vision, and dental insurance",
+            "Creative work environment",
+            "Paid time off",
+            "Hardware allowance"
+        ],
+        "posted_date": "2024-12-26"
+    },
+    {
+        "id": "job_010",
+        "title": "Backend Developer",
+        "company": "ServerLogic Corp",
+        "location": "Toronto, ON (Remote)",
+        "type": "Full-time",
+        "experience_required": "4+ years",
+        "education_required": "Bachelor's in Computer Science",
+        "salary_range": "$105,000 - $145,000",
+        "description": "ServerLogic Corp is hiring a Backend Developer to build and maintain the core logic of our applications. You will be responsible for server-side web application logic and integration of the front-end work. We need someone who writes clean, scalable, and secure code.",
+        "requirements": ["java", "spring boot", "python", "golang", "sql", "nosql", "redis", "kafka", "docker", "microservices"],
+        "responsibilities": [
+            "Write server-side code for web-based applications",
+            "Optimize applications for maximum speed",
+            "Design and manage database schemas",
+            "Implement security and data protection measures",
+            "Integrate user-facing elements developed by front-end developers"
+        ],
+        "benefits": [
+            "Remote first culture",
+            "Comprehensive benefits",
+            "Stock options",
+            "Home office setup budget",
+            "Flexible schedule"
+        ],
+        "posted_date": "2024-12-28"
+    }
+]

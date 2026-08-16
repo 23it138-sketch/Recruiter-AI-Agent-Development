@@ -1,0 +1,39 @@
+Maria Garcia
+maria.garcia@example.com | (555) 222-3333 | Austin, TX
+LinkedIn: linkedin.com/in/mariagarcia
+
+PROFESSIONAL SUMMARY
+Strategic Product Manager with 7 years of experience guiding products from conception to launch in agile environments. Adept at cross-functional leadership, data-driven decision making, and aligning product strategy with business goals to deliver exceptional user experiences.
+
+TECHNICAL SKILLS
+Methodologies: Agile, Scrum, Kanban
+Product Management: Roadmapping, Backlog Grooming, User Research, A/B Testing
+Tools: JIRA, Confluence, Trello, Figma, Miro
+Data Analysis: SQL, Google Analytics, Data Analysis, Stakeholder Management
+
+PROFESSIONAL EXPERIENCE
+Global Tech Solutions | Senior Product Manager | Aug 2020 - Present
+- Led the development and launch of a new enterprise SaaS platform, resulting in $2M in new ARR in the first year.
+- Managed a cross-functional team of 12 engineers, designers, and QA testers.
+- Conducted extensive user research and A/B testing to refine UI/UX, improving user retention by 25%.
+- Defined and tracked product KPIs, presenting quarterly updates to executive stakeholders.
+
+Creative Apps Co. | Product Manager | Feb 2017 - Jul 2020
+- Directed the lifecycle of mobile applications from ideation to deployment on iOS and Android.
+- Prioritized product backlogs in JIRA based on market research and customer feedback.
+- Collaborated with marketing teams to plan successful go-to-market strategies.
+
+StartUp Inc. | Associate Product Manager | Jun 2016 - Jan 2017
+- Assisted in market analysis and competitive research for a new fintech product.
+- Gathered and documented detailed product requirements and user stories.
+
+EDUCATION
+Master of Business Administration (MBA) | Business School | 2019
+Bachelor of Science in Engineering | State Tech | 2015
+
+CERTIFICATIONS
+Certified Scrum Product Owner (CSPO)
+
+PROJECTS
+Customer Journey Mapping Initiative
+- Spearheaded a comprehensive mapping of the customer journey, identifying key pain points and driving a 15% increase in customer satisfaction scores.

@@ -1,0 +1,37 @@
+David Chen
+david.chen@example.com | (555) 777-8888 | Chicago, IL
+LinkedIn: linkedin.com/in/davidchen | GitHub: github.com/davidchen
+
+PROFESSIONAL SUMMARY
+Full Stack Developer with 4 years of experience building dynamic and scalable web applications. Proficient in both front-end and back-end technologies, with a strong focus on delivering high-performance, user-centric software solutions.
+
+TECHNICAL SKILLS
+Languages: JavaScript, TypeScript, Python, HTML/CSS
+Frontend: React, Next.js, Redux, Tailwind CSS
+Backend: Node.js, Express, Django, GraphQL
+Databases: PostgreSQL, MongoDB, Redis
+DevOps & Tools: Docker, AWS, Git, Webpack
+
+PROFESSIONAL EXPERIENCE
+Web Innovators LLC | Full Stack Developer | Oct 2021 - Present
+- Developed and maintained single-page applications using React and TypeScript.
+- Designed and implemented scalable GraphQL APIs with Node.js and Apollo Server.
+- Migrated legacy databases to PostgreSQL, improving query performance and data integrity.
+- Containerized applications using Docker, streamlining the development and deployment process.
+
+Creative Web Agency | Junior Full Stack Developer | Jul 2019 - Sep 2021
+- Built custom e-commerce websites using Django and React.
+- Integrated third-party payment gateways like Stripe and PayPal.
+- Optimized web page load times by implementing lazy loading and caching strategies.
+- Collaborated closely with UI/UX designers to implement responsive designs.
+
+EDUCATION
+Bachelor of Science in Software Engineering | Pacific Tech | 2019
+
+PROJECTS
+Open Source Contribution - React UI Library
+- Contributed several accessible UI components (modals, dropdowns) to a popular open-source React component library.
+Real-time Chat Application
+- Built a full-stack real-time chat application using React, Node.js, Socket.io, and MongoDB. Implemented user authentication and private messaging features.
+Portfolio Website Platform
+- Developed a platform allowing users to generate portfolio websites dynamically, utilizing Next.js for server-side rendering.
